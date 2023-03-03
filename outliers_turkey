@@ -1,0 +1,23 @@
+x<-rnorm(100,0,1)
+x<-c(x,3,4,6)
+x
+z=boxplot(x, horizontal=TRUE)
+z
+is_outlier_turkey <- function(x){
+  crit_1 <- as.numeric(quantile(x,0.75) +1.5*IQR(x))
+  crit_2 <- as.numeric(quantile(x,0.25) -1.5*IQR(x))
+  crit_ex1 <- as.numeric(quantile(x,0.75) +3*IQR(x))
+  crit_ex2 <- as.numeric(quantile(x,0.25) -3*IQR(x))
+  outliers <- (x>crit_1 | x<crit_2)
+  outliers_ex<- (x>crit_ex1 | x<crit_ex2)
+  #print(outliers)
+  if(any(outliers))
+    print('Los siguientes valores son anomalos:')
+    print(x[outliers],sep=',')
+    print('Los siguientes valores son extremadamento anomalos:')
+    print(x[outliers_ex],sep=',')
+}
+is_outlier_turkey(x)
+
+
+
